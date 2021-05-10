@@ -35,7 +35,8 @@ When comparing previous props and state to next, a shallow comparison will check
 **Deep** compare works on value of nested object as well. <br>
 
 ### React.memo
-```const MyComponent = React.memo(function MyComponent(props) {
+```
+const MyComponent = React.memo(function MyComponent(props) {
   /* render using props */
 });
 ```
@@ -57,7 +58,7 @@ export default React.memo(MyComponent, areEqual);
 React.memo is a higher order component
 
 ### React.createRef <br>
-React.createRef creates a ref that can be attached to React elements via the ref attribute. React will assign the current property with the DOM element when the component mounts, and assign it back to **null** when it unmounts. ref updates happen before componentDidMount or componentDidUpdate lifecycle methods. <br>
+**React.createRef creates a ref that can be attached to React elements via the ref attribute**. React will assign the current property with the DOM element when the component mounts, and assign it back to **null** when it unmounts. ref updates happen before componentDidMount or componentDidUpdate lifecycle methods. <br>
 By default, you may not use the ref attribute **on**(it's on not in) function components because they don’t have instances. If we want to ref **on** functional components then we can use forwardRef.
 But we can use ref(useRef()) inside the functional components
 ```
@@ -291,7 +292,6 @@ const EnhancedComponent = higherOrderComponent(WrappedComponent);
 In other words, connect is a higher-order function that returns a higher-order component!
 // Instead of doing this...
 const EnhancedComponent = withRouter(connect(commentSelector)(WrappedComponent))
-
 // ... you can use a function composition utility
 // compose(f, g, h) is the same as (...args) => f(g(h(...args)))
 const enhance = compose(
@@ -301,14 +301,13 @@ const enhance = compose(
 )
 const EnhancedComponent = enhance(WrappedComponent)
 ```
-**Static Methods Must Be Copied Over** <br>
+**Static Methods Must Be Copied Over** 
 When you apply a HOC to a component, though, the original component is wrapped with a container component. That means the new component does not have any of the static methods of the original component. <br>
 ```
 // Define a static method
 WrappedComponent.staticMethod = function() {/*...*/}
 // Now apply a HOC
 const EnhancedComponent = enhance(WrappedComponent);
-
 // The enhanced component has no static method
 typeof EnhancedComponent.staticMethod === 'undefined' // true
 ```

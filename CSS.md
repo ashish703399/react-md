@@ -20,6 +20,12 @@ right and left margins are 50px
 `Border` - A border that goes around the padding and content<br>
 `Margin` - Clears an area outside the border. The margin is transparent<br>
 
+![BoxModal without box sizing](./images/boxModel_without_box_sizing.png) <br>
+Content size width is 100px same as defined width
+
+![BoxModal with box sizing](./images/boxModel_with_box_sizing.png) <br>
+Content size width is 60px with box-sizing: border-box; css<br> 
+
 ### CSS Property
 `text-align` - The text-align property is used to set the horizontal alignment of a text.
 When the text-align property is set to "justify", each line is stretched so that every line has equal width, and the left and right margins are straight (like in magazines and newspapers) <br>
@@ -54,7 +60,7 @@ div.fixed {
 ```
 ```
 absolute:==>
-An element with position: absolute; is positioned relative to the nearest positioned ancestor (instead of positioned relative to the viewport, like fixed).
+An element with position: absolute; is positioned relative to the nearest positioned ancestor with position relative, absolute, fixed, sticky,(instead of positioned relative to the viewport, like fixed).
 
 However; if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.
 
@@ -75,6 +81,9 @@ A sticky element toggles between relative and fixed, depending on the scroll pos
 +   padding: 50px; /* if you want space between the images */
 + }
 ```
+#### float vs absolute :
+float will have interaction with other html nearby elements where as absolute position element only interaction with their nearest ancestors.
+
 [`display`](https://www.w3schools.com/css/css_inline-block.asp) - inline-block | inline | block
 ```
 inline-block:==>
@@ -93,14 +102,8 @@ If an element is taller than the element containing it, and it is floated, it wi
   overflow: auto;
 }
 ```
-`box-sizing` - Since the result of using the box-sizing: border-box; is so much better, many developers want all elements on their pages to work this way.
-<br>
-The code below ensures that all elements are sized in this more intuitive way. Many browsers already use box-sizing: border-box; for many form elements (but not all - which is why inputs and text areas look different at width: 100%;).
-```
-box-sizing: border-box;
-```
-
 ### Equal CSS
+
 ```
 text-align: center;
 // Equal 
@@ -245,7 +248,9 @@ a[target] {
 
 <td>.class1 .class2</td>
 
-<td>.test .heading { font-weight: bold; }</td>
+<td>.test .heading { <br>
+&nbsp; &nbsp; font-weight: bold; <br>
+}</td>
 
 <td>
 It will point .headiung (child element) class inside .test (parent element) class <br />
@@ -648,13 +653,13 @@ If there are two or more conflicting CSS rules that point to the same element, t
 Specificity Hierarchy
 Every selector has its place in the specificity hierarchy. There are four categories which define the specificity level of a selector:
 
-`Inline styles` - An inline style is attached directly to the element to be styled. Example: h1 style="color: #ffffff;".
+`Inline styles` - **1000** An inline style is attached directly to the element to be styled. Example: h1 style="color: #ffffff;".
 
-`IDs` - An ID is a unique identifier for the page elements, such as #navbar.
+`IDs` - **100** An ID is a unique identifier for the page elements, such as #navbar.
 
-`Classes, attributes and pseudo-classes` - This category includes .classes, [attributes] and pseudo-classes such as :hover, :focus etc.
+`Classes, attributes and pseudo-classes` - **10** This category includes .classes, [attributes] and pseudo-classes such as :hover, :focus etc.
 
-`Elements and pseudo-elements` - This category includes element names and pseudo-elements, such as h1, div, :before and :after.
+`Elements and pseudo-elements` - **1** This category includes element names and pseudo-elements, such as h1, div, :before and :after.
 
 ```
 // Start at 0, add 1000 for style attribute, add 100 for each ID, add 10 for each attribute, class or pseudo-class, add 1 for each element name or pseudo-element.'
@@ -738,6 +743,25 @@ button {
   [class*="col-"] {
     width: 100%;
   }
+}
+```
+
+### [CSS Modules](https://css-tricks.com/css-modules-part-1-need/)
+Using CSS modules we can use css specific to component and it will used with dot operator
+```
+import buttons from "./buttons.css";
+import padding from "./padding.css";
+
+element.innerHTML = `<div class="${buttons.red} ${padding.large}">`;
+```
+### [Compose](https://css-tricks.com/css-modules-part-1-need/)
+1. Using compose we can use css of other class
+2. Using compose we can define inline css as well (Not sure)
+```
+.element {
+  composes: dark-red from "./colors.css";
+  font-size: 30px;
+  line-height: 1.2;
 }
 ```
 

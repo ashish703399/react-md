@@ -1,0 +1,31 @@
+function eventProvider(){
+    const map = new Map();
+    this.subscribe = function(eventName, callback){
+        const array = map.has(eventName) ? map.get(eventName) : [];
+		array.push(callback);
+        map.set(eventName, array);
+        
+    };
+
+    this.dispatch = function(eventName){
+        if(map.has(eventName)){
+            const callbackArray = map.get(eventName);
+            for(callback of callbackArray){
+                callback();
+            }
+        }
+    };
+}
+
+var nn = new eventProvider();
+
+nn.subscribe('test', ()=>{console.log('sub called')});
+nn.subscribe('test', ()=>{console.log('sub called1')});
+nn.subscribe('test', ()=>{console.log('sub called2')});
+nn.subscribe('test', ()=>{console.log('sub called3')});
+
+nn.subscribe('test11', ()=>{console.log('sub called 11')});
+nn.subscribe('test11', ()=>{console.log('sub called 1112')});
+
+nn.dispatch('test')
+nn.dispatch('test11')
