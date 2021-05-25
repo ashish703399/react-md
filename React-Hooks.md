@@ -2,6 +2,20 @@
 
 Hooks are functions that provide us  React state and lifecycle features from function components.
 
+##### Table of Contents
+[Rules of Hooks](#user-content-rules-of-hooks)<br>
+[Hooks API Reference](#user-content-hooks-api-reference)<br>
+[Performance](#user-content-performance)<br>
+[Custom hooks](#user-content-custom-hooks)<br>
+[React Lifecycle - Diagram Attched](#user-content-react-lifecycle---diagram-attched)<br>
+[Higher Order Components](#user-content-higher-order-components)<br>
+[Synthetic events vs Browser events](#user-content-events)<br>
+[Portals](#portals)<br>
+[Profiler API](#profiler-api)<br>
+[Render Props](#user-content-render-props)<br>
+[Composition vs Inheritence](#user-content-composition-vs-inheritence)<br>
+
+
 ### Rules of Hooks
 * Only call Hooks at the top level. Don’t call Hooks inside loops, conditions, or nested functions. <br>
 * Only call Hooks from React function components. Don’t call Hooks from regular JavaScript functions. <br>
@@ -12,7 +26,7 @@ Hooks are functions that provide us  React state and lifecycle features from fun
 Hooks embrace JavaScript closures and avoid introducing React-specific APIs where JavaScript already provides a solution.
 
 Note : React also provide linter plugin to enforce above rules automatically. <br>
- 
+
 
 ```
 const Example = (props) => {
@@ -28,20 +42,20 @@ function Example(props) {
 
 ### Hooks API Reference
 Basic Hooks
-* useState
-* useEffect
-* useContext
+* [useState](#useState)
+* [useEffect](#useEffect)
+* [useContext](#useContext)
 
 Additional Hooks
-* useReducer
-* useCallback
-* useMemo
-* useRef
-* useImperativeHandle
-* useLayoutEffect
-* useDebugValue
+* [useReducer](#useReducer)
+* [useCallback](#useCallback)
+* [useMemo](#useMemo)
+* [useRef](#useRef)
+* [useImperativeHandle](#useImperativeHandle)
+* [useLayoutEffect](#useLayoutEffect)
+* [useDebugValue](#useDebugValue)
 
-`useState` <br>
+#### useState
 If the new state is computed using the previous state, you can pass a function to setState. The function will receive the previous value, and return an updated value
 ```diff
 function Counter({initialCount}) {
@@ -97,12 +111,12 @@ const [state, setState] = useState(() => {
 });
 ```
 
-`useEffect` <br>
+#### useEffect
 The function passed to useEffect will run after the render is committed to the screen
 
 By default, effects run after every completed render, but you can choose to fire them only when certain values have changed.
 
-`useContext`  <br>
+#### useContext
 const value = useContext(MyContext); <br>
 Even if an ancestor uses React.memo or shouldComponentUpdate, a re-render will still happen starting at the component itself using useContext. <br>
 
@@ -150,7 +164,7 @@ function ThemedButton() {
 }
 
 ```
-`useReducer` <br>
+#### useReducer
 ```const [state, dispatch] = useReducer(reducer, initialArg, init);``` <br>
 to Lazy initialization : You can also create the initial state lazily. To do this, you can pass an init function as the third argument. The initial state will be set to init(initialArg).
 
@@ -190,7 +204,7 @@ function Counter({initialCount}) {
 }
 ```
 
-`useCallback` <br>
+#### useCallback
 ```
 const memoizedCallback = useCallback(
   () => {
@@ -205,13 +219,13 @@ Pass an inline callback and an array of dependencies. useCallback will return a 
 
 useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
 
-`useMemo` <br>
+#### useMemo
 If no array is provided, a new value will be computed on every render.
 ```
 const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ```
 
-`useRef` <br>
+#### useRef
 ```const refContainer = useRef(initialValue);```
 useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
 
@@ -235,7 +249,7 @@ function TextInputWithFocusButton() {
 
 Note : This works because useRef() creates a plain JavaScript object. The only difference between useRef() and creating a {current: ...} object yourself is that useRef will give you the same ref object on every render.
 
-`useImperativeHandle` <br>
+### useImperativeHandle
 useImperativeHandle customizes the instance value that is exposed to parent components when using ref. As always, imperative code using refs should be avoided in most cases. useImperativeHandle should be used with forwardRef:
 
 ```
@@ -252,7 +266,7 @@ FancyInput = forwardRef(FancyInput);
 ```
 In this example, a parent component that renders <FancyInput ref={inputRef} /> would be able to call inputRef.current.focus().
 
-`useLayoutEffect` <br>
+#### useLayoutEffect
 If you use server rendering, keep in mind that neither useLayoutEffect nor useEffect can run until the JavaScript is downloaded. This is why React warns when a server-rendered component contains useLayoutEffect. To fix this, either move that logic to useEffect (if it isn’t necessary for the first render), or delay showing that component until after the client renders (if the HTML looks broken until useLayoutEffect runs).
 
 To exclude a component that needs layout effects from the server-rendered HTML, render it conditionally with showChild && <Child /> and defer showing it with useEffect(() => { setShowChild(true); }, []). This way, the UI doesn’t appear broken before hydration.
@@ -336,14 +350,14 @@ Specifying [count] as a list of dependencies would fix the bug, but would cause 
 ```
 function Counter() {
      const [count, setCount] = useState(0);
-   
+
      useEffect(() => {
        const id = setInterval(() => {
          setCount(c => c + 1); // ✅ This doesn't depend on `count` variable outside
        }, 1000);
        return () => clearInterval(id);
      }, []); // ✅ Our effect doesn't use any variables in the component scope
-   
+
      return <h1>{count}</h1>;
    }
 ```
@@ -371,22 +385,26 @@ function Example(props) {
 ```
 
 **How do I implement shouldComponentUpdate?** <br>
-```const Button = React.memo((props) => {
+```
+const Button = React.memo((props) => {
      // your component
    });
 ```
 
 **How to memoize calculations?**
-```const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);```
+```
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+```
 
 **initial state is expensive**
 
-```function Table(props) {
+```
+function Table(props) {
      // ⚠️ createRows() is called on every render
      const [rows, setRows] = useState(createRows(props.count));
      // ...
    }
-   
+
    // To avoid re-creating the ignored initial state, we can pass a function to useState:
    function Table(props) {
      // ✅ createRows() is only called once
@@ -399,15 +417,18 @@ Another example
 
 // You might also occasionally want to avoid re-creating the useRef() initial value. For example, maybe you want to ensure some imperative class instance only gets created once:
 
-```function Image(props) {
+```
+function Image(props) {
   // ⚠️ IntersectionObserver is created on every render
   const ref = useRef(new IntersectionObserver(onIntersect));
   // ...
-}```
+}
+```
 
 // useRef does not accept a special function overload like useState. Instead, you can write your own function that creates and sets it lazily:
 
-```function Image(props) {
+```
+function Image(props) {
   const ref = useRef(null);
 
   // ✅ IntersectionObserver is created lazily once
@@ -426,6 +447,6 @@ Another example
 **Are Hooks slow because of creating functions in render?** <br>
 No. In modern browsers, the raw performance of closures compared to classes doesn’t differ significantly except in extreme scenarios.
 
- 
+
 
 

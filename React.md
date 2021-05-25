@@ -7,6 +7,7 @@
 [React.forwardRef](#user-content-reactforwardref)<br>
 [React Lifecycle - Diagram Attched](#user-content-react-lifecycle---diagram-attched)<br>
 [Higher Order Components](#user-content-higher-order-components)<br>
+[Synthetic events vs Browser events](#user-content-events)<br>
 [Portals](#portals)<br>
 [Profiler API](#profiler-api)<br>
 [Render Props](#user-content-render-props)<br>
@@ -15,7 +16,7 @@
 ### Reconciliation
 The algorithm React uses to diff one tree with another to determine which parts need to be changed.
 
-The reason it can support so many targets is because React is designed so that reconciliation and rendering are separate phases. The reconciler does the work of computing which parts of a tree have changed; the renderer then uses that information to actually update the rendered app.
+The reason it can support so many targets is because React is designed so that **reconciliation and rendering** are separate phases. The reconciler does the work of computing which parts of a tree have changed; the renderer then uses that information to actually update the rendered app.
 
 This separation means that React DOM and React Native can use their own renderers while sharing the same reconciler, provided by React core.
 
