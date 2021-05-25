@@ -8,12 +8,6 @@ Hooks are functions that provide us  React state and lifecycle features from fun
 [Performance](#user-content-performance)<br>
 [Custom hooks](#user-content-custom-hooks)<br>
 [IntersectionObserver with hooks](#intersectionObserver)<br>
-[Higher Order Components](#user-content-higher-order-components)<br>
-[Synthetic events vs Browser events](#user-content-events)<br>
-[Portals](#portals)<br>
-[Profiler API](#profiler-api)<br>
-[Render Props](#user-content-render-props)<br>
-[Composition vs Inheritence](#user-content-composition-vs-inheritence)<br>
 
 
 ### Rules of Hooks
@@ -229,6 +223,8 @@ const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ```const refContainer = useRef(initialValue);```
 useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
 
+The useRef() Hook isn’t just for DOM refs. The “ref” object is a generic container whose current property is mutable and can hold any value, similar to an instance property on a class.
+
 A common use case is to access a child imperatively:
 
 ```
@@ -244,6 +240,22 @@ function TextInputWithFocusButton() {
       <button onClick={onButtonClick}>Focus the input</button>
     </>
   );
+}
+// one more
+function Timer() {
+  const intervalRef = useRef();
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      // ...
+    });
+    intervalRef.current = id;
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  });
+
+  // ...
 }
 ```
 

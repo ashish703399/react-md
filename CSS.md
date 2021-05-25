@@ -1,6 +1,22 @@
 
 # CSS
-A CSS rule consists of a selector and a declaration block. 
+A CSS rule consists of a selector and a declaration block.
+
+##### Table of Contents
+[Box model](#box-model)<br>
+[CSS Property - Position](#position)<br>
+[float vs absolute](#float-vs-absolute-)<br>
+[CSS Selector](#css-selector)<br>
+[CSS Functions](#css-functions)<br>
+[CSS Property - Flex](#css-flex)<br>
+[CSS Image Sprites](#css-image-sprites)<br>
+[CSS Specificity](#css-specificity)<br>
+[Animation](#animation)<br>
+[var in css](#var-in-css)<br>
+[Media Query](#media-query)<br>
+[CSS Modules](#css-modules)<br>
+[compose](#compose)<br>
+
 
 ### Margin shorthand
 ```
@@ -24,7 +40,7 @@ right and left margins are 50px
 Content size width is 100px same as defined width
 
 ![BoxModal with box sizing](./images/boxModel_with_box_sizing.png) <br>
-Content size width is 60px with box-sizing: border-box; css<br> 
+Content size width is 60px with box-sizing: border-box; css<br>
 
 ### CSS Property
 `text-align` - The text-align property is used to set the horizontal alignment of a text.
@@ -32,7 +48,8 @@ When the text-align property is set to "justify", each line is stretched so that
 `vertical-align` - The vertical-align property sets the vertical alignment of an element. <br>
 `text-transform` - uppercase|lowercase |...<br>
 `text-indent`: 50px; // spacing<br>
-`position` : static | relative | fixed | absolute | sticky <br>
+#### position
+* static | relative | fixed | absolute | sticky <br>
 ```
 static:==>
 Static positioned elements are not affected by the top, bottom, left, and right properties.
@@ -73,8 +90,8 @@ A sticky element toggles between relative and fixed, depending on the scroll pos
 `float` - The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
 ```diff
 + right | left | none | inherit
- 
-// add box to all div and it will divide every div into defined width 
+
+// add box to all div and it will divide every div into defined width
 + .box {
 +   float: left;
 +   width: 33.33%; /* three boxes (use 25% for four, and 50% for two, etc) */
@@ -95,8 +112,8 @@ Compared to display: block, the major difference is that display: inline-block d
 
 The following example shows the different behavior of display: inline, display: inline-block and display: block:
 ```
-[`clearfix`](https://www.w3schools.com/howto/howto_css_clearfix.asp) - 
-If an element is taller than the element containing it, and it is floated, it will overflow outside of its container. You can use the "clearfix" hack to fix this (see example below).  
+[`clearfix`](https://www.w3schools.com/howto/howto_css_clearfix.asp) -
+If an element is taller than the element containing it, and it is floated, it will overflow outside of its container. You can use the "clearfix" hack to fix this (see example below).
 ```
 .clearfix {
   overflow: auto;
@@ -106,7 +123,7 @@ If an element is taller than the element containing it, and it is floated, it wi
 
 ```
 text-align: center;
-// Equal 
+// Equal
 img {
   display: block;
   margin-left: auto;
@@ -122,7 +139,7 @@ img {
   border: 3px solid #73AD21;
   padding: 10px;
 }
-// Equal 
+// Equal
 .right {
   position: absolute;
   right: 0px;
@@ -148,7 +165,7 @@ We can divide CSS selectors into five categories:
 
 `pseudo-class` - A pseudo-class is used to define a special state of an element.
 ```
-syntax: 
+syntax:
 selector:pseudo-class {
   property: value;
 }
@@ -165,14 +182,14 @@ p:first-child i { // Match all <i> elements in all first child <p> elements
   color: blue;
 }
 ```
-`Pseudo-Elements` - 
+`Pseudo-Elements` -
 ```
 // syntax
-selector::pseudo-element { 
+selector::pseudo-element {
   property: value;
 }
 
-p.intro::first-letter { // Pseudo-elements can be combined with CSS classes: 
+p.intro::first-letter { // Pseudo-elements can be combined with CSS classes:
   color: #ff0000;
   font-size: 200%;
 }
@@ -196,7 +213,7 @@ h1::after {
 }
 // The ::selection pseudo-element matches the portion of an element that is selected by a user.
 // The following CSS properties can be applied to ::selection: color, background, cursor, and outline.
-::selection { 
+::selection {
   color: red;
   background: yellow;
 }
@@ -496,7 +513,7 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  
+
 }
 li {
   float: left;
@@ -529,7 +546,7 @@ and much more	<br>
 Aural style sheets use a combination of speech synthesis and sound effects to make the user listen to information, instead of reading information. specially for blind people
 
 ### CSS Flex
-Flexbox provide us to render block elements into various direction with all possible ways. Before Flexbox layout module, there were four modes: 
+Flexbox provide us to render block elements into various direction with all possible ways. Before Flexbox layout module, there were four modes:
 * Block, for sections in a webpage
 * Inline, for text
 * Table, for two-dimensional table data
@@ -550,18 +567,18 @@ To achieve flex.. first we need to set display property as flex
 ```
 `flex-flow` - A shorthand property for flex-direction and flex-wrap | ex: row wrap
 
-`justify-content` - Horizontally aligns the flex items when the items do not use all available space on the main-axis 
+`justify-content` - Horizontally aligns the flex items when the items do not use all available space on the main-axis
 ```diff
 + center | flex-start | flex-end | space-around | space-between
-``` 
+```
 [`align-items`](https://www.w3schools.com/cssref/playit.asp?filename=playcss_align-items&preval=stretch) - Vertically aligns the flex items when the items do not use all available space on the cross-axis, here block height will change
 ```diff
 + center | flex-start | flex-end | stretch | baseline
-``` 
+```
 [`align-content`](https://www.w3schools.com/cssref/playit.asp?filename=playcss_align-content&preval=stretch) - Modifies the behavior of the flex-wrap property. It is similar to align-items, but instead of aligning flex items, it aligns flex lines and flex lines means block which we are using in flex container
  ```diff
 + space-between | space-around | stretch | center | flex-start | flex-end
-``` 
+```
 [**Flex Items - The flex Items properties are:**](https://www.w3schools.com/css/css3_flexbox_items.asp)<br>
 `align-self` - Specifies the alignment for a flex item (overrides the flex container's align-items property)
 ```diff
@@ -580,7 +597,7 @@ To achieve flex.. first we need to set display property as flex
 +   <div style="flex-grow: 1">2</div>
 +   <div style="flex-grow: 8">3</div>
 + </div>
-``` 
+```
 `flex-shrink` = Specifies how much a flex item will shrink relative to the rest of the flex items inside the same container
 ```diff
 // Do not let the third flex item shrink as much as the other flex items:
@@ -588,18 +605,18 @@ To achieve flex.. first we need to set display property as flex
 +   <div>1</div>
 +   <div>3</div>
 +   <div style="flex-shrink: 0">4</div>
-+   <div>5</div>  
++   <div>5</div>
 + </div>
-``` 
-`order` - Specifies the order of the flex items inside the same container 
+```
+`order` - Specifies the order of the flex items inside the same container
 ```diff
 + <div class="flex-container">
 +   <div style="order: 3">1</div>
 +   <div style="order: 4">2</div>
-+   <div style="order: 1">3</div> 
++   <div style="order: 1">3</div>
 +   <div style="order: 1">4</div>
 + </div>
-``` 
+```
 
 ###CSS Entities
 If you use CSS to display any of these characters in HTML, you can use the CSS entity found in the table below.
@@ -681,7 +698,7 @@ ID selectors have a higher specificity than attribute selectors
 
 ### Animation
 ```
-<style> 
+<style>
 div {
   width: 100px;
   height: 100px;
@@ -736,7 +753,7 @@ button {
 
 ```
 
-### Media Query 
+### Media Query
 ```
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */

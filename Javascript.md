@@ -1,5 +1,25 @@
 # JAVAScript
 
+##### Table of Contents
+[Hoisting](#user-content-hoisting)<br>
+[Higher Order Functions](#user-content-higher-order-functions)<br>
+[Currying](#user-content-currying)<br>
+[Arrow functions vs Regular function](#arrow-functions-vs-regular-function)<br>
+[var, const and let](#var-const-and-let)<br>
+[Promises](#promises--it-has-four-states---pending-rejected-settled)<br>
+[Functions vs Classes](#functions-vs-classes)<br>
+[Genrator Functions](#genrator-functions)<br>
+[WeakSet](#set-vs-weakset)<br>
+[WeakMap](#map-vs-weakmap)<br>
+[Object Destructuring](#object-destructuring)<br>
+[For of and For-in](#for-of-and-for-in)<br>
+[call, apply, bind()](#call-apply-bind)<br>
+[Coercion](#coercion)<br>
+[intersectionobserver](#intersectionobserver)<br>
+[ES6 | ES2020 Feature](#es6--es2020-feature)<br>
+[Best Blogs](#best-blogs)<br>
+
+
 ## [2021](https://www.interviewbit.com/javascript-interview-questions/)
 ### SSNNBBU
 ```
@@ -11,14 +31,14 @@ BigInt : end with n
 
 ### typeOf
 ```javascript
-typeof undefined // Returns "undefined" 
-typeof null // Returns "object" (kind of a bug in JavaScript) 
-typeof Null // Returns "undefined" (as Null is undefined variable here) 
-typeof [] // Returns "object" 
-typeof {} // Returns "object" 
+typeof undefined // Returns "undefined"
+typeof null // Returns "object" (kind of a bug in JavaScript)
+typeof Null // Returns "undefined" (as Null is undefined variable here)
+typeof [] // Returns "object"
+typeof {} // Returns "object"
 ```
 
-### isNAN 
+### isNAN
 ```javascript
 isNaN("Hello")  // Returns true <br>
 isNaN(345)   // Returns false <br>
@@ -45,7 +65,7 @@ In JavaScript, primitive data types are passed by value and non-primitive data t
 ### Immediately Invoked Function
 An Immediately Invoked Function ( known as IIFE and pronounced as IIFY) is a function that runs as soon as it is defined.
 ```javascript
-(function(){          			(() => { // arrow function      
+(function(){          			(() => { // arrow function
   // Do something;					// Do something;
 })();						      })();
 ```
@@ -64,7 +84,7 @@ var b = ()=> {
 b()()();
 ```
 
-### (Arrow functions vs Regular function)[https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/]
+### [Arrow functions vs Regular function](https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/)
 ```diff
 var obj1 = {
   valueOfThis: function(){
@@ -80,13 +100,13 @@ var obj2 = {
 obj1.valueOfThis(); // Will return the object obj1
 obj2.valueOfThis(); // Will return window/global object as there is no binding of this keyword
 ++ Note -- The this keyword inside an arrow function, does not refer to the object calling it. It rather inherits its value from the parent scope which is the window object in this case.
-Major Points : 
+Major Points :
 1. this value
 2. Constructor
 3. Syntax change like Implicit return
-In Regular function : 
+In Regular function :
 1. this value inside a regular function is dynamic and depends on the invocation. But this inside the arrow function is bound lexically and equals to this of the outer function.
- 
+
 ```
 ### var, const and let
 <table>
@@ -124,9 +144,9 @@ In Regular function :
         </tbody>
       </table>
 
-1. var always have the global scope means it will be on global scope even if it is in block scope. and let will not have the global scope. 
-2. In **`FUNCTIONAL SCOPE`** let and var both are equal. means both will not have access on global object. and outer variable will have different value as compare to inner. none of the vairable get overwrite and none reference error will come. 
-3. **BLOCK SCOPE** : In block scope var will have same rule means no matter var is outside or inside. 
+1. var always have the global scope means it will be on global scope even if it is in block scope. and let will not have the global scope.
+2. In **`FUNCTIONAL SCOPE`** let and var both are equal. means both will not have access on global object. and outer variable will have different value as compare to inner. none of the vairable get overwrite and none reference error will come.
+3. **BLOCK SCOPE** : In block scope var will have same rule means no matter var is outside or inside.
 4. if var is out side then let can have same variable name because here let can have own block scope but not allowed vice versa because var will move on top using hoisting.<br>
    **Note : if let is defined like let a; and in side block var a; again then there will be error like reference already defined because var will move outside the block scope** <br>
 6. variable with let keyword will always be binded with block scope.
@@ -142,10 +162,10 @@ function catchValues(){
 // Both the variables can be accessed anywhere since they are declared in the global scope
 }
 window.variable1; // Returns the value 23
-window.variable2; // Returns undefined 
+window.variable2; // Returns undefined
 ```
 
-Note (same copied in more depth): 
+Note (same copied in more depth):
 * var : have only functional scope.. in case if variable declared with var  keyword outside the functional scope, will have windows/global scope. Therefore, they can be accessed using window.variableName
 * Whereas, the variables declared with the let keyword are not added to the global object, therefore, trying to access such variables using window.variableName results in an error.
 * Variables declared in a functional/local scope using var and let keywords behave exactly the same, meaning , they cannot be accessed from outside of the scope.
@@ -158,7 +178,7 @@ Note (same copied in more depth):
 ```javascript
 let s = 5;
 (function test(){
-    var s = 6; /output=>6/ 
+    var s = 6; /output=>6/
 })();
 /output=>5/
 
@@ -170,15 +190,15 @@ var x = 5;
 
 var k = 5;
 (function test(){
-    let k = 6; /output=>6/ 
+    let k = 6; /output=>6/
 })();
-/output=>5/ 
+/output=>5/
 
 var a = 5;
 {
-    let a = 6; /output=>6/ 
+    let a = 6; /output=>6/
 }
-/output=>5/ 
+/output=>5/
 
 let b = 5;
 {
@@ -301,7 +321,7 @@ const c = 1;
 console.log(c); // logs 1 and does not throw SyntaxError...
 ```
 
-### Promises : it has four states -> Pending, Fulfilled, Rejected, Settled
+### Promises : it has four states -> Pending, Rejected, Settled
 ```javascript
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
@@ -321,7 +341,7 @@ async function asyncCall() {
 asyncCall();
 ```
 
-### Functions vs Classes 
+### Functions vs Classes
 * Unlike functions, classes are not hoisted. A class cannot be used before it is declared.
 * A class can inherit properties and methods from other classes by using the extend keyword.
 * All the syntaxes inside the class must follow the strict mode(‘use strict’) of javascript. Error will be thrown if the strict mode rules are not followed.
@@ -424,7 +444,7 @@ const map3 = new WeakMap();
 map3.set(obj, {age:23});
 ```
 
-### Object Destructuring
+### Object Destructuring & Rest Operator
 
 ```javascript
 const classDetails = {
@@ -441,7 +461,9 @@ console.log(classBlackBoard); // Outputs 1
 ```
 ```javascript
 const arr = [1, 2, 3, 4];
-const [first,second,third,fourth] = arr;
+const [first,second,third,fourth, ...rest] = arr;
+
+// in rest variable we will keep all the remainig array item
 
 console.log(first); // Outputs 1
 console.log(second); // Outputs 2
@@ -480,8 +502,9 @@ func2();
 ```
 
 ### For of and For-in
-`For-in` - For in loop is using for iterable object. <br>
-`For-of` - For of loop is using for array of any object. <br>
+`For-in` - For in loop is using for iterable object and in simple we can say it will iterate over keys <br>
+`For-of` - For of loop is using for array of any object and in simple we can say it will iterate over values <br>
+Note - if we run for in on array of primitives data types then it will return the index of item.
 
 ### call, apply, bind()
 call() method takes arguments separately whereas, apply() method takes arguments as an array.
@@ -504,7 +527,7 @@ The ‘==’ operator, converts both the operands to the same type and then comp
   console.log("Hello" - "World" + 78); // NaN <br>
   console.log("Hello"+ "78"); // Hello78 <br>
  ```
- 
+
  ### Rules for Coercion
  1. String Conversion
 	* `+` - When **any operand is string** around + then string concatenation will occur
@@ -513,13 +536,13 @@ The ‘==’ operator, converts both the operands to the same type and then comp
 	['1'].valueOf() // [1]
 	[1].toString() // '1'
 	[`1`].toString() // '1'
-	
+
 	```
  2. Boolean Conversion
 	*  `|| && !` - Logical operators such as || and && do boolean conversions internally, but actually return the value of original operands, even if they are not boolean.
  ```javascript
  Boolean('')           // false
-Boolean(0)            // false     
+Boolean(0)            // false
 Boolean(-0)           // false
 Boolean(NaN)          // false
 Boolean(null)         // false
@@ -556,7 +579,7 @@ Number(123)                    // 123
 5. NaN does not equal to anything even itself:
 6. Basic Rules
 	* In case of + any operand is string the string conversion occue else Numeric conversion
-	* In case of == if both string are exists and string conversion else Numeric conversion occue even with single string operand. 
+	* In case of == if both string are exists and string conversion else Numeric conversion occue even with single string operand.
 	* In case of == left operand and right operand will conversion with their own state
 	* For non primitive valueOf or tostring method of object prototype is used, for primitive String(), Number(), Boolean() will be used just for knowledge
 
@@ -567,7 +590,7 @@ Number(123)                    // 123
 Implicit conversion happens in logical context, or is triggered by logical operators ( || && !) .
 * Note: Logical operators such as || and && do boolean conversions internally, but actually return the value of original operands, even if they are not boolean.
 * + with String - All primitive values are converted to strings naturally as you might expect
-* Number Coversion occur when - 
+* Number Coversion occur when -
 comparison operators (>, <, <=,>=) <br>
 bitwise operators ( | & ^ ~) <br>
 arithmetic operators (- + * / % ). Note, that binary+ does not trigger numeric conversion, when any operand is a string <br>
@@ -590,7 +613,7 @@ true + false             // 1
 false == 'false'         // false
 null == ''               // false
 !!"false" == !!"true"    // true
-['x'] == 'x'             // true 
+['x'] == 'x'             // true
 [] + null + 1            // 'null1'
 0 || "0" && {} 			 // {} => (0 || "0") && {} => (false || true) && true  // internally => "0" && {} =>  true && true             // internally => {} finally
 [1,2,3] == [1,2,3]       // false
@@ -600,13 +623,48 @@ null == ''               // false
 {} + 'sd' 					// NaN ==> {}(ignore as paranthese) + 'sd'  ==> + 'sd' ==> NaN
 new Date(0) - 0          // 0 // - operator triggers numeric conversion for Date. Date.valueOf() returns number of milliseconds since Unix epoch.
 new Date(0) + 0          // 'Thu Jan 01 1970 02:00:00(EET)0' // + operator triggers default conversion. Date assumes string conversion as a default one, so toString() method is used, rather than valueOf().
-[] === [] => false as refernce will be checked 
+[] === [] => false as refernce will be checked
 [] == [] => false as refernce will be checked
-[] == false => true 
+[] == false => true
 ```
 
+### [IntersectionObserver](!https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+The Intersection Observer API provides a way to asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
+
+```
+let options = {
+  root: document.querySelector('#scrollArea'),
+  // will take root is null if We want to watch for changes in visibility of the target element relative to the document's viewport, so root is null
+  rootMargin: '0px',
+  threshold: 1.0
+}
+
+let observer = new IntersectionObserver(callback, options);
+// A threshold of 1.0 means that when 100% of the target is visible within the element specified by the root option, the callback is invoked.
+
+let target = document.querySelector('#listItem');
+observer.observe(target);
+```
+
+`options` <br>
+* `threshold` - Either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed. If you only want to detect when visibility passes the 50% mark, you can use a value of 0.5. If you want the callback to run every time visibility passes another 25%, you would specify the array [0, 0.25, 0.5, 0.75, 1]. The default is 0 (meaning as soon as even one pixel is visible, the callback will be run). A value of 1.0 means that the threshold isn't considered passed until every pixel is visible.
+  * [0, 0.25, 0.5, 0.75, 1] - Callback function will get call after every 25% pass.
+  * 0 means callback function will get call as soon as even one pixel is visible
+  * A value of 1.0 means that the threshold isn't considered passed until every pixel is visible.
+
+### ES6 | ES2020 Feature
+`BigInt` <br>
+`Dynamic import` - const module= await import('./dynamicModule.js') <br>
+`Nullish Coalescing` - using with ?? operator and allow undefind and null as true <br>
+`Optional Chaining` - x.prop1?.prop2?.prop3 <br>
+`Promise.allSettled` - The Promise.allSettled method accepts an array of Promises and only resolves when all of them are settled – either resolved or rejected.<br>
+`String#matchAll` - matchAll is a new method added to the String prototype which is related to Regular Expressions. This returns an iterator which returns all matched groups one after another<br>
+`globalThis` - This is because it is window for browsers, global for Node, and self for web workers. If there are more runtimes, the global object will be different for them as well.<br>
+`Module Namespace Exports` - import * as utils from './utils.mjs'
+export { utils }<br>
+
 # Best Blogs
-* [Dom Event Life Cycle](https://medium.com/prod-io/javascript-understanding-dom-event-life-cycle-49e1cf62b2ea) 
+* [Dom Event Life Cycle](https://medium.com/prod-io/javascript-understanding-dom-event-life-cycle-49e1cf62b2ea)
 * [Critical Path Rendering]
 * [Execution Context](https://medium.com/@itIsMadhavan/what-is-the-execution-context-stack-in-javascript-e169812e851a)
 * [Hoisting with let and const](https://javascript.plainenglish.io/how-hoisting-works-with-let-and-const-in-javascript-725616df7085)
