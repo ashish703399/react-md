@@ -8,7 +8,7 @@ webpack is an open-source JavaScript module bundler. It is made primarily for Ja
 [HMR](#hmr)<br>
 [Shimming](#shimming)<br>
 [Web workers](#web-workers)<br>
-[Progressive Web Application](#progressive-web-applicationplugin)<br>
+[Progressive Web Application](#progressive-web-application)<br>
 
 
 ## Why webpack

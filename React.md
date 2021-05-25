@@ -1,5 +1,17 @@
 # React
 
+##### Table of Contents
+[Reconciliation](#reconciliation)<br>
+[React.memo](#user-content-reactmemo)<br>
+[React.createRef](#user-content-reactcreateref-)<br>
+[React.forwardRef](#user-content-reactforwardref)<br>
+[React Lifecycle - Diagram Attched](#user-content-react-lifecycle---diagram-attched)<br>
+[Higher Order Components](#user-content-higher-order-components)<br>
+[Portals](#portals)<br>
+[Profiler API](#profiler-api)<br>
+[Render Props](#user-content-render-props)<br>
+[Composition vs Inheritence](#user-content-composition-vs-inheritence)<br>
+
 ### Reconciliation
 The algorithm React uses to diff one tree with another to determine which parts need to be changed.
 
@@ -68,7 +80,7 @@ class MyComponent extends React.Component {
 
     this.inputRef = React.createRef();
   }
-  
+
   render() {
     // for normal elements
     return <input type="text" ref={this.inputRef} />;
@@ -89,7 +101,7 @@ Ref within functional component
 function CustomTextInput(props) {
   // textInput must be declared here so the ref can refer to it
   const textInput = useRef(null);
-  
+
   function handleClick() {
     textInput.current.focus();
   }
@@ -130,7 +142,7 @@ const ref = React.createRef();
 
 ```
 
-### React.lazy & React.suspense 
+### React.lazy & React.suspense
 React.lazy() lets you define a component that is loaded dynamically. This helps reduce the bundle size to delay loading components that aren’t used during the initial render.
 
 React.Suspense lets you specify the loading indicator in case some components in the tree below it are not yet ready to render. Today, lazy loading components is the only use case supported by <React.Suspense>:
@@ -151,11 +163,11 @@ function MyComponent() {
 ```
 
 ### [React Lifecycle - Diagram Attched](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
-`componentDidMount()` - best place for api calls and subscription <br>  
+`componentDidMount()` - best place for api calls and subscription <br>
 `componentDidUpdate()` - best place for api calls <br>
-You should not call setState() in componentWillUnmount() because the component will never be re-rendered. Once a component instance is unmounted, it will never be mounted again. <br> 
+You should not call setState() in componentWillUnmount() because the component will never be re-rendered. Once a component instance is unmounted, it will never be mounted again. <br>
 `shouldComponentUpdate()`- will not call on initial render or when forceupdate() is used <br>
-`static getDerivedStateFromProps()` -  is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or null to update nothing. this will not be accessible here <br> 
+`static getDerivedStateFromProps()` -  is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or null to update nothing. this will not be accessible here <br>
 This method exists for rare use cases where the state depends on changes in props over time. For example, it might be handy for implementing a <Transition> component that compares its previous and next children to decide which of them to animate in and out. <br>
 `getSnapshotBeforeUpdate()` - getSnapshotBeforeUpdate() is invoked right before the most recently rendered output is committed to e.g. the DOM. It enables your component to capture some information from the DOM (e.g. scroll position) before it is potentially changed. Any value returned by this lifecycle will be passed as a parameter to componentDidUpdate() <br>
 
@@ -226,7 +238,7 @@ promise.then(() => {
 
 ## React DOM
 * `render()` - ReactDOM.render() currently returns a reference to the root ReactComponent instance. However, using this return value is legacy and should be avoided because future versions of React may render components asynchronously in some cases. If you need a reference to the root ReactComponent instance, the preferred solution is to attach a callback ref to the root element. <br>
-* `hydrate()` - Same as render(), but is used to hydrate a container whose HTML contents were rendered by ReactDOMServer. React will attempt to attach event listeners to the existing markup. <br> 
+* `hydrate()` - Same as render(), but is used to hydrate a container whose HTML contents were rendered by ReactDOMServer. React will attempt to attach event listeners to the existing markup. <br>
 * `unmountComponentAtNode()` - ReactDOM.unmountComponentAtNode(container) ==> cannot be used on function components.Remove a mounted React component from the DOM and clean up its event handlers and state. If no component was mounted in the container, calling this function does nothing. Returns true if a component was unmounted and false if there was no component to unmount <br>
 * `findDomNode()` - cannot be used on function components. <br>
 * `createPortal()` - ReactDOM.createPortal(child, container) ==> Portals provide a way to render children into a DOM node that exists outside the hierarchy of the DOM component. <br>
@@ -248,7 +260,7 @@ function MyComponent() {
     return <div dangerouslySetInnerHTML={createMarkup()} />;
 }
 ```
- 
+
 * `style` - used for inline css
 ```
 const divStyle = {
@@ -267,7 +279,7 @@ In simple words browser's events may vary across the different browsers but synt
 * In normal javascript we can return false for event but in react we have to call e.preventDefault and here e is synthetic event.
 
 # Advance Guides
-### Accessibility - 
+### Accessibility -
 * `Labeling`
 ```
 <label htmlFor="namedInput">Name:</label> // htmlFor is for of DOM
@@ -276,7 +288,7 @@ In simple words browser's events may vary across the different browsers but synt
 * [`Removing outline while focusing through keyboard`](https://reactjs.org//static/dec0e6bcc1f882baf76ebc860d4f04e5/4fcfe/keyboard-focus.png) - outline: 0
 * `Eslint plugin for accessibility` - eslint-plugin-jsx-a11y
 
-### Code spliting 
+### Code spliting
 * Bundling Tools - Webpack, Rollup, Browserify
 
 ### Higher Order Components
@@ -301,7 +313,7 @@ const enhance = compose(
 )
 const EnhancedComponent = enhance(WrappedComponent)
 ```
-**Static Methods Must Be Copied Over** 
+**Static Methods Must Be Copied Over**
 When you apply a HOC to a component, though, the original component is wrapped with a container component. That means the new component does not have any of the static methods of the original component. <br>
 ```
 // Define a static method
@@ -322,10 +334,10 @@ function enhance(WrappedComponent) {
 ```
 **Ref will not pass through HOC as they are not props like key.  Actually ref refers to an instance of the outermost container component, not the wrapped component. The solution for this problem is to use the React.forwardRef API.**
 
-### [JSX In depth](https://reactjs.org/docs/jsx-in-depth.html) 
+### [JSX In depth](https://reactjs.org/docs/jsx-in-depth.html)
 Booleans, Null, and Undefined Are Ignored, Always use boolean comparison to condionally rendered item <br>
 
-### Portals 
+### Portals
 Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component
 ```
 ReactDOM.createPortal(child, container)
@@ -344,7 +356,7 @@ render() {
     );
   }
 
-// parent Class 
+// parent Class
     <Modal>
       <Child />
     </Modal>
@@ -352,7 +364,7 @@ render() {
 
 ### Profiler API
 The Profiler measures how often a React application renders and what the “cost” of rendering is. Its purpose is to help identify parts of an application that are slow and may benefit from optimizations such as memoization. <br>
-And it Disabled on production build but we can enable it. <br> 
+And it Disabled on production build but we can enable it. <br>
 We can render it anywhere in the tree to measure the code of rendering part and can have multiple profiler as well
 ```
 render(
@@ -380,7 +392,7 @@ function onRenderCallback(
   // Aggregate or log render timings...
 }
 ```
-### Render Props 
+### Render Props
 A render prop is a function prop that a component uses to know what to render. A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.
 
 ```
@@ -439,7 +451,7 @@ class MouseTracker extends React.Component {
 }
 ```
 
-### Strict Mode 
+### Strict Mode
 StrictMode is a tool for highlighting potential problems in an application. Like Fragment, StrictMode does not render any visible UI. It activates additional checks and warnings for its descendants. <br>
 Strict mode checks are run in development mode only; they do not impact the production build. <br>
 ```
@@ -455,16 +467,16 @@ Strict mode checks are run in development mode only; they do not impact the prod
     </div>
 ```
 
-### React vs WebComponents 
+### React vs WebComponents
 Web Components often expose an imperative API. For instance, a video Web Component might expose play() and pause() functions. To access the imperative APIs of a Web Component, you will need to use a ref to interact with the DOM node directly.
 
- 
+
 
 
 ### [Composition vs Inheritence]()
 Composition provide all the usecase which we can achieve through inheritence. in Composition we can pass component as props and render them. and reuse the component code
 
- 
+
 
 
 
@@ -496,7 +508,7 @@ React.isValidElement(object) <br>
 
 
 
- 
+
 
 
 
