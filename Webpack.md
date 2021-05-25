@@ -1,9 +1,19 @@
 # Webpack
 webpack is an open-source JavaScript module bundler. It is made primarily for JavaScript, but it can transform front-end assets such as HTML, CSS, and images if the corresponding loaders are included. webpack takes modules with dependencies and generates static assets representing those modules
 
-## Why webpack 
+##### Table of Contents
+[Loaders](#loaders)<br>
+[Plugins](#plugin)<br>
+[Build Performance](#build-performance)<br>
+[HMR](#hmr)<br>
+[Shimming](#shimming)<br>
+[Web workers](#web-workers)<br>
+[Progressive Web Application](#progressive-web-applicationplugin)<br>
+
+
+## Why webpack
 There are two ways to run JavaScript in a browser. <br>
-`First` - include a script for each functionality; this solution is hard to scale because loading too many scripts can cause a network bottleneck. <br> 
+`First` - include a script for each functionality; this solution is hard to scale because loading too many scripts can cause a network bottleneck. <br>
 `second` - option is to use a big .js file containing all your project code, but this leads to problems in scope, size, readability and maintainability
 
 
@@ -15,7 +25,7 @@ Note : Incase if win32 related error is coming  ```yarn config set ignore-engine
 
 ```
 # both are equal
-Entry : 
+Entry :
 module.exports = {
   entry: './path/to/my/entry/file.js',
 };
@@ -45,12 +55,12 @@ let compiler = webpack(configuration);
 ```
 If you need multiple bundles for multiple HTML pages you can use the "multiple entry points" feature. It will build multiple bundles at once. Additional chunks can be shared between these entry chunks and modules are only built once.
 
-###Loaders 
+### Loaders
 Out of the box, webpack only understands JavaScript and JSON files. Loaders allow webpack to process other types of files and convert them into valid modules that can be consumed by your application and added to the dependency graph
 They allow you to pre-process files as you import or “load” them
 
-**Main Points :** 
-* A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain. <br>
+**Main Points :**
+* **A chain is executed in reverse order.** The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain. <br>
 ==> Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader
 ```
 module.exports = {
@@ -78,7 +88,6 @@ module.exports = {
 ```
 * Loaders can be synchronous or asynchronous.
 * Loaders run in Node.js and can do everything that’s possible there.
-* Plugins can give loaders more features
 * Loaders can emit additional arbitrary files
 
 **At a high level, loaders have two properties in your webpack configuration:**
@@ -93,11 +102,12 @@ module: {
 
 ```
 
-_Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a 
+_Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a
 require()/import statement, use the raw-loader to transform it before you add it to the bundle._
 
-###Plugins
-While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
+### Plugin
+
+Plugins can give loaders more features. While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
 
 Plugins are the backbone of webpack. webpack itself is built on the same plugin system that you use in your webpack configuration!
 
@@ -117,10 +127,10 @@ compiler.run(function (err, stats) {
 `CleanWebpackPlugin` - used for cleaning dist folder after every build <br>
 `webpackmanifestplugin` - [stackoverflow link](https://stackoverflow.com/questions/57661590/purpose-of-webpack-manifest-plugin-in-webpack)
 
-###Configuration 
+###Configuration
 `devtool: 'inline-source-map'` - might it show error on console with file name and line no.
 
-**There are a couple of different options available in webpack that help you automatically compile your code whenever it changes** <br> 
+**There are a couple of different options available in webpack that help you automatically compile your code whenever it changes** <br>
 `webpack's Watch Mode` - You can instruct webpack to "watch" all files within your dependency graph for changes. If one of these files is updated, the code will be recompiled so you don't have to run the full build manually
 
 `webpack-dev-server` - The webpack-dev-server provides you with a simple web server and the ability to use live reloading. Let's set it up:Now we can run npm start from the command line and we will see our browser automatically loading up our page
@@ -155,10 +165,10 @@ there are some pitfalls to this approach:
     },
     shared: 'lodash',
    }
-``` 
+```
 
 use shared: 'lodash', in entry to create different chunk of lodash and we can use  dependOn: 'shared', on both entry point.. runtimeChunk: 'single' in optimization option of webpack <br>
-`Note` - If we're going to use multiple entry points on a single HTML page, optimization.runtimeChunk: 'single' is needed too 
+`Note` - If we're going to use multiple entry points on a single HTML page, optimization.runtimeChunk: 'single' is needed too
 optimization: {
     runtimeChunk: 'single',
   },
@@ -192,26 +202,26 @@ optimization: {
      },
     },
 
-```        
-and if we use ```moduleIds: 'deterministic',``` will not update hash for vendor chunk 
+```
+and if we use ```moduleIds: 'deterministic',``` will not update hash for vendor chunk
 
-###[Build performance](https://webpack.js.org/guides/build-performance/)
+### [Build performance](https://webpack.js.org/guides/build-performance/)
 `Worker Pool` - The thread-loader can be used to offload expensive loaders to a worker pool <br>
-`parallel-webpack` - It allows for compilation in a worker pool(thread worker). <br> 
+`parallel-webpack` - It allows for compilation in a worker pool(thread worker). <br>
 `cache-loader` - The cache can be shared between multiple compilations.
 
-###HMR
+### HMR
 If you took the route of using webpack-dev-middleware instead of webpack-dev-server, please use the webpack-hot-middleware package to enable HMR on your custom server or application.
 
-###webpack-merge
+### webpack-merge
 will be used to merge common configs into multiple main configs.
 
-###DefinePlugin
+### DefinePlugin
 to use inject variable to a global level
 
 * `TerserPlugin` - the TerserPlugin is a great place to start for minification and being used by default, there are other options out there `closure-webpack-plugin`
 
-###shimming
+### shimming
 plugins: [
     new webpack.ProvidePlugin({
       _: 'lodash', or  join: ['lodash', 'join'],
@@ -220,7 +230,7 @@ plugins: [
 
 ProvidePlugin - it expose _ variables through out the app.
 
-###Web workers 
+### Web workers
 you can use Web Workers without worker-loader
 ```
 new Worker(new URL('./worker.js', import.meta.url))
@@ -234,7 +244,7 @@ worker.onmessage = ({ data: { answer } }) => {
 };
 ```
 
-###progressive-web-application
+### progressive-web-application
 it is the technique through which we serve the urls from service worker thread and it will cache the that url at very first time
 
 ```
@@ -258,12 +268,14 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
-###mocha-webpack - to be continue... 
- 
-###karma-webpack - to be continue...
-                   
+### mocha-webpack
+to be continue...
 
- 
- 
+### karma-webpack
+to be continue...
+
+
+
+
 
 ### Now add webpack.config.file (cient.dev.js)

@@ -64,7 +64,7 @@ var b = ()=> {
 b()()();
 ```
 
-### Arrow functions vs normal function 
+### (Arrow functions vs Regular function)[https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/]
 ```diff
 var obj1 = {
   valueOfThis: function(){
@@ -80,6 +80,13 @@ var obj2 = {
 obj1.valueOfThis(); // Will return the object obj1
 obj2.valueOfThis(); // Will return window/global object as there is no binding of this keyword
 ++ Note -- The this keyword inside an arrow function, does not refer to the object calling it. It rather inherits its value from the parent scope which is the window object in this case.
+Major Points : 
+1. this value
+2. Constructor
+3. Syntax change like Implicit return
+In Regular function : 
+1. this value inside a regular function is dynamic and depends on the invocation. But this inside the arrow function is bound lexically and equals to this of the outer function.
+ 
 ```
 ### var, const and let
 <table>
