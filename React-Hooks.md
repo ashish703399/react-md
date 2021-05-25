@@ -7,7 +7,7 @@ Hooks are functions that provide us  React state and lifecycle features from fun
 [Hooks API Reference](#user-content-hooks-api-reference)<br>
 [Performance](#user-content-performance)<br>
 [Custom hooks](#user-content-custom-hooks)<br>
-[React Lifecycle - Diagram Attched](#user-content-react-lifecycle---diagram-attched)<br>
+[IntersectionObserver with hooks](#intersectionObserver)<br>
 [Higher Order Components](#user-content-higher-order-components)<br>
 [Synthetic events vs Browser events](#user-content-events)<br>
 [Portals](#portals)<br>
@@ -425,6 +425,7 @@ function Image(props) {
 }
 ```
 
+#### IntersectionObserver
 // useRef does not accept a special function overload like useState. Instead, you can write your own function that creates and sets it lazily:
 
 ```
