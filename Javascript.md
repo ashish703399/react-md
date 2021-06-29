@@ -727,10 +727,10 @@ How to optimize :
 2.
 
 ### DOM Event Life Cycle Method
-The typical DOM event flow is conceptually divided into three phases:
-`Capture phase`: The capture phase comprises all the DOM elements on the trip from the Document to the parent of the target element on which an event was triggered. In other words, when everything from the Document to the target, not including the target itself.M<br>
-`Target phase`: The target phase occurs when the event reaches the target. Then event fired on the target, before reversing and retracing its steps, propagating back to the outermost Document.<br>
-`Bubbling phase`: The bubbling phase comprises all the DOM elements encountered on the return trip from the target back to the Document. Bubbling gives the freedom of handling an event on any element by its parent elements.<br>
+The typical DOM event flow is conceptually divided into three phases:<br>
+**Capture phase**: The capture phase comprises all the DOM elements on the trip from the Document to the parent of the target element on which an event was triggered. In other words, when everything from the Document to the target, not including the target itself.M<br>
+**Target phase**: The target phase occurs when the event reaches the target. Then event fired on the target, before reversing and retracing its steps, propagating back to the outermost Document.<br>
+**Bubbling phase**: The bubbling phase comprises all the DOM elements encountered on the return trip from the target back to the Document. Bubbling gives the freedom of handling an event on any element by its parent elements.<br>
 
 
 
