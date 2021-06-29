@@ -108,6 +108,30 @@ In Regular function :
 1. this value inside a regular function is dynamic and depends on the invocation. But this inside the arrow function is bound lexically and equals to this of the outer function.
 
 ```
+
+### this scope
+```
+var length = 10;
+function fn(){
+    console.log('Ashish',this.length);
+}
+
+var obj = {
+    length: 5,
+    method: function(fn){
+        fn();
+        arguments[0]();
+        console.log('inner scope',this.length);
+    }
+}
+
+obj.method(fn, 1);
+
+// 10
+// 2 // this is the length of arguments, if we use another variable then undefined will print
+// inner scope 5
+```
+
 ### var, const and let
 <table>
         <tbody>
@@ -665,15 +689,48 @@ export { utils }<br>
 
 # Best Blogs
 * [Dom Event Life Cycle](https://medium.com/prod-io/javascript-understanding-dom-event-life-cycle-49e1cf62b2ea)
-* [Critical Path Rendering]
+* [Critical Path Rendering]()
 * [Execution Context](https://medium.com/@itIsMadhavan/what-is-the-execution-context-stack-in-javascript-e169812e851a)
 * [Hoisting with let and const](https://javascript.plainenglish.io/how-hoisting-works-with-let-and-const-in-javascript-725616df7085)
 * [Coding Challenges](https://javascript.plainenglish.io/javascript-coding-practice-challenges-strings-f2c9a98e8e5e)
-* [Prototypes In JavaScript](https://betterprogramming.pub/prototypes-in-javascript-5bba2990e04b)
+* [Prototypes In JavaScript](https://betterprogramming.pub/prototypes-in-javascript-5bba2990e04b)<br>
 *[javascript-internals-javascript-engine-run-time-environment-settimeout-web-api](https://blog.bitsrc.io/javascript-internals-javascript-engine-run-time-environment-settimeout-web-api-eeed263b1617)
 
+### [Critical Path Rendering](!https://medium.com/@luisvieira_gmr/understanding-the-critical-rendering-path-rendering-pages-in-1-second-735c6e45b47a)
+In order to render the component the browser has to go through a series of steps:
+
+1. Document object Model (DOM)
+2. CSS Object Model(CSSOM)
+3. Render Tree
+4. Layout
+5. Paint
+
+![Critical Rendering Path](./images/critical_rendering_path.PNG) <br>
+Content size width is 100px same as defined width
 
 
+1. Document object Model (DOM)
+     Once browser initiate a request it starts receiving the response in chunks of data, and initializes the html parser, as the parser finds any links for CSS or Javascript, it immediatelly sends a request for them, after that it also sends requests for all the other assets found in the rest of the page.
+     When this process is finished the browser will have the full content of the page, but to be able to render the browser has to wait for the CSS Object Model, also known as CSSOM event, which will tell the browser how the elements should look like when rendered.
+2. CSS Object Model(CSSOM)
+      In this stage the CSS parser goes through each node and gets the styles attributed to it.
+      CSS is one of the most important elements of the critical rendering path, because the browser blocks page rendering until it receives and processes all the css files in your page, CSS is render blocking
+3. Render Tree
+  This stage is where the browser combines the DOM and CSSOM, this process outputs a final render tree, which contains both the content and the style information of all the visible content on the screen.
+4. Layout
+This stage is where the browser calculates the size and position of each visible element on the page, every time an update to the render tree is made, or the size of the viewport changes, the browser has to run layout again.
+5. Paint
+When we get to the paint stage, the browser has to pick up the layout result, and paint the pixels to the screen, beware in this stage that not all styles have the same paint times, also combinations of styles can have a greater paint time than the sum of their parts. For an instance mixing a border-radius with a box-shadow, can triple the paint time of an element instead of using just one of the latter.
+
+How to optimize :
+1. The HTML content should be less as possible or we can pass the HTML into stream.
+2.
+
+### DOM Event Life Cycle Method
+The typical DOM event flow is conceptually divided into three phases:
+`Capture phase`: The capture phase comprises all the DOM elements on the trip from the Document to the parent of the target element on which an event was triggered. In other words, when everything from the Document to the target, not including the target itself.M<br>
+`Target phase`: The target phase occurs when the event reaches the target. Then event fired on the target, before reversing and retracing its steps, propagating back to the outermost Document.<br>
+`Bubbling phase`: The bubbling phase comprises all the DOM elements encountered on the return trip from the target back to the Document. Bubbling gives the freedom of handling an event on any element by its parent elements.<br>
 
 
 

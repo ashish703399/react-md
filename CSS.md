@@ -15,7 +15,7 @@ A CSS rule consists of a selector and a declaration block.
 [var in css](#var-in-css)<br>
 [Media Query](#media-query)<br>
 [CSS Modules](#css-modules)<br>
-[compose](#compose)<br>
+[compose](#compose  )<br>
 
 
 ### Margin shorthand
