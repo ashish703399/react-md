@@ -11,11 +11,9 @@ let findBalanceIndex = (arr) => {
       k = i;
       l = j;
     }
-
     if(i === j){
       break;
     }
-
     if(sumLeft < sumRight){
       sumLeft += arr[i];
       i++;
@@ -23,7 +21,6 @@ let findBalanceIndex = (arr) => {
       sumRight += arr[j];
       j--;
     }
-
   }
   return l;
 }

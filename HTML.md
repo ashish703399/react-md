@@ -5,7 +5,7 @@
 * Web Storage API <br />
 `localStorage` - stores data with no expiration date <br />
 `sessionStorage` - stores data for one session (data is lost when the browser tab is closed) <br />
-* Web Workers 
+* Web Workers
 ```
 // simple web worker that count numbers in the background
 if (typeof(Worker) !== "undefined") {
@@ -22,7 +22,7 @@ w.terminate();
 ```
 
 
- **Since web workers are in external files, they do not have access to the following JavaScript objects:** <br /> 
+ **Since web workers are in external files, they do not have access to the following JavaScript objects:** <br />
 * The window object <br />
 * The document object <br />
 * The parent object <br />
@@ -53,11 +53,11 @@ w.terminate();
 
 // In XHTML, the language is declared inside the <html> tag as follows:
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-``` 
+```
 #### HTML Keys :
 `<!DOCTYPE html>` - The declaration is not an HTML tag. It is an "information" to the browser about what document type to expect. <br />
 `URL` - Uniform Resource Locator <br />
-`Semantic HTML` - Semantic HTML is one style of coding, where the tags convey the meaning of the text <br />
+[`Semantic HTML`](https://www.bitdegree.org/learn/html5-semantic-tags) - Semantic HTML is one style of coding, where the tags convey the meaning of the text <br />
 `non-semantic elements` - div and span <br />
 `semantic elements` - form, table, and article <br />
 `HTTP` - Hypertext Transfer Protocol - <br />
@@ -66,7 +66,7 @@ w.terminate();
 
 `HTML Entities` - Reserved characters in HTML must be replaced with character entities. <br>
 ```
-Result	Description   	Entity Name	  Entity Number 
+Result	Description   	Entity Name	  Entity Number
     <	  less than			&lt;		    &#60;
 
 // HTML charset Attribute
@@ -84,7 +84,7 @@ To display an HTML page correctly, a web browser must know the character set use
 </html>
 
 ```
-`srcset` - 
+`srcset` -
 ```
 <picture>
   <source srcset="img_smallflower.jpg" media="(max-width: 600px)">
@@ -99,7 +99,7 @@ To display an HTML page correctly, a web browser must know the character set use
     <circle cx="50" cy="50" r="40" stroke="yellow" stroke-width="4" fill="red" />
 </svg>
 ```
-`Media Query` - 
+`Media Query` -
 ```
 <style>
 .left, .right {
@@ -131,6 +131,8 @@ Examples of elements that are inline by default: (span), (b), (strong), (a), (in
 
 **What is semantic HTML?** <br />
 It is the use of HTML markup to reinforce the semantics or meaning of the content.
+
+HTML5 semantic tags define the purpose of the element. By using semantic markup, you help the browser understand the meaning of the content instead of just displaying it. By providing this extra level of clarity, HTML5 semantic elements also help search engines to read the page and find the required information faster.
 
 **How to create a nested webpage in HTML?**
 ```
@@ -181,9 +183,9 @@ Cookies are limited to about 4 KB of data. Not enough to store required data. <b
 Once you get a Web Socket connection with the web server, you can send data from browser to server by calling a send() method, and receive data from server to browser by an onmessage event handler.
 var Socket = new WebSocket(url, [protocal] );
 ```
-Socket.close() 
+Socket.close()
 Socket.send()
-Socket.onmessage = function (evt) { 
+Socket.onmessage = function (evt) {
       var received_msg = evt.data;
       alert("Message is received...");
    };

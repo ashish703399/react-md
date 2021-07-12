@@ -16,7 +16,8 @@
 [call, apply, bind()](#call-apply-bind)<br>
 [Coercion](#coercion)<br>
 [intersectionobserver](#intersectionobserver)<br>
-[ES6 | ES2020 Feature](#es6--es2020-feature)<br>
+[ES11 | ES2020 Feature](#es11--es2020-feature)<br>
+[ECMAScript](#ecmascript)<br>
 [Best Blogs](#best-blogs)<br>
 
 
@@ -85,29 +86,59 @@ b()()();
 ```
 
 ### [Arrow functions vs Regular function](https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/)
+
+* this value <br>
+    * this value inside a regular function is dynamic and depends on the invocation. But this inside the arrow function is bound lexically and equals to this of the outer function.
+* Constructors
+    * the regular function can easily construct objects
+* arguments object
+    * arguments object inside the regular functions contains the list of arguments. The arrow function, on the opposite, doesn’t define arguments (but you can easily access the arrow function arguments using a rest parameter ...args).
+* Implicit return
+    * If the arrow function has one expression, then the expression is returned implicitly, even without using the return keyword.
+* Methods
+    * you can define methods using the arrow function syntax inside classes. Fat arrow methods bind this value to the class instance.
 ```diff
 var obj1 = {
-  valueOfThis: function(){
-    return this;
-  }
-}
-var obj2 = {
-  valueOfThis: ()=>{
-    return this;
-  }
+  valueOfThisInNormalFunction: function(){
+    console.log(this); // obj1 i.e. current obj
+  },
+  valueOfThisInArrow: ()=>{
+    console.log(this); // window
+  },
 }
 
-obj1.valueOfThis(); // Will return the object obj1
-obj2.valueOfThis(); // Will return window/global object as there is no binding of this keyword
+obj1.valueOfThisInNormalFunction();
+obj1.valueOfThisInArrow();
 ++ Note -- The this keyword inside an arrow function, does not refer to the object calling it. It rather inherits its value from the parent scope which is the window object in this case.
-Major Points :
-1. this value
-2. Constructor
-3. Syntax change like Implicit return
-In Regular function :
-1. this value inside a regular function is dynamic and depends on the invocation. But this inside the arrow function is bound lexically and equals to this of the outer function.
 
+
+function new1() {
+    console.log('first',this);
+    this.valueOfThisInNormalFunction = function(){
+        console.log('inside',this);
+     };
+     this.valueOfThisInArrow =  ()=>{
+        console.log(this);
+     };
+    this.valueOfThisInNormalFunction();
+    this.valueOfThisInArrow();
+}
+new1(); // global context
+console.log('finish execution for above function');
+new new1(); // function context
+// first Window {window: Window, self: Window, document: document, name: "", location: Location, …}
+// inside Window {window: Window, self: Window, document: document, name: "", location: Location, …}
+// Window {window: Window, self: Window, document: document, name: "", location: Location, …}
+// finish execution for above function
+// first new1 {}
+// inside new1 {valueOfThisInNormalFunction: ƒ, valueOfThisInArrow: ƒ}
+// new1 {valueOfThisInNormalFunction: ƒ, valueOfThisInArrow: ƒ}
+// new1 {valueOfThisInNormalFunction: ƒ, valueOfThisInArrow: ƒ}
 ```
+
+1. Arguments objects are not available in arrow functions, but are available in regular functions.
+Regular functions created using function declarations or expressions are ‘constructible’ and ‘callable’.
+
 
 ### this scope
 ```
@@ -676,7 +707,7 @@ observer.observe(target);
   * 0 means callback function will get call as soon as even one pixel is visible
   * A value of 1.0 means that the threshold isn't considered passed until every pixel is visible.
 
-### ES6 | ES2020 Feature
+### ES11 | ES2020 Feature
 `BigInt` <br>
 `Dynamic import` - const module= await import('./dynamicModule.js') <br>
 `Nullish Coalescing` - using with ?? operator and allow undefind and null as true <br>
@@ -693,10 +724,13 @@ export { utils }<br>
 * [Execution Context](https://medium.com/@itIsMadhavan/what-is-the-execution-context-stack-in-javascript-e169812e851a)
 * [Hoisting with let and const](https://javascript.plainenglish.io/how-hoisting-works-with-let-and-const-in-javascript-725616df7085)
 * [Coding Challenges](https://javascript.plainenglish.io/javascript-coding-practice-challenges-strings-f2c9a98e8e5e)
-* [Prototypes In JavaScript](https://betterprogramming.pub/prototypes-in-javascript-5bba2990e04b)<br>
-*[javascript-internals-javascript-engine-run-time-environment-settimeout-web-api](https://blog.bitsrc.io/javascript-internals-javascript-engine-run-time-environment-settimeout-web-api-eeed263b1617)
+* [Prototypes In JavaScript](https://betterprogramming.pub/prototypes-in-javascript-5bba2990e04b)
+* [JS-internals-JS-engine-run-time-environment-settimeout-web-api](https://blog.bitsrc.io/javascript-internals-javascript-engine-run-time-environment-settimeout-web-api-eeed263b1617)
+* [Depth of this](https://dmitripavlutin.com/gentle-explanation-of-this-in-javascript/#23-pitfall-this-in-an-inner-function)
+* [Design Patterns](https://addyosmani.com/resources/essentialjsdesignpatterns/book/)
+* [React Fiber](https://link.medium.com/Y3xinuTw9gb)
 
-### [Critical Path Rendering](!https://medium.com/@luisvieira_gmr/understanding-the-critical-rendering-path-rendering-pages-in-1-second-735c6e45b47a)
+## [Critical Path Rendering](!https://medium.com/@luisvieira_gmr/understanding-the-critical-rendering-path-rendering-pages-in-1-second-735c6e45b47a)
 In order to render the component the browser has to go through a series of steps:
 
 1. Document object Model (DOM)
@@ -705,34 +739,115 @@ In order to render the component the browser has to go through a series of steps
 4. Layout
 5. Paint
 
-![Critical Rendering Path](./images/critical_rendering_path.PNG) <br>
+![Critical Rendering Path](./images/critical_rendering_path.PNG) <br><br><br>
 Content size width is 100px same as defined width
 
 
-1. Document object Model (DOM)
+1. **Document object Model (DOM)** <br>
      Once browser initiate a request it starts receiving the response in chunks of data, and initializes the html parser, as the parser finds any links for CSS or Javascript, it immediatelly sends a request for them, after that it also sends requests for all the other assets found in the rest of the page.
      When this process is finished the browser will have the full content of the page, but to be able to render the browser has to wait for the CSS Object Model, also known as CSSOM event, which will tell the browser how the elements should look like when rendered.
-2. CSS Object Model(CSSOM)
+2. **CSS Object Model(CSSOM)** <br>
       In this stage the CSS parser goes through each node and gets the styles attributed to it.
       CSS is one of the most important elements of the critical rendering path, because the browser blocks page rendering until it receives and processes all the css files in your page, CSS is render blocking
-3. Render Tree
+3. **Render Tree** <br>
   This stage is where the browser combines the DOM and CSSOM, this process outputs a final render tree, which contains both the content and the style information of all the visible content on the screen.
-4. Layout
+4. **Layout** <br>
 This stage is where the browser calculates the size and position of each visible element on the page, every time an update to the render tree is made, or the size of the viewport changes, the browser has to run layout again.
-5. Paint
+5. **Paint** <br>
 When we get to the paint stage, the browser has to pick up the layout result, and paint the pixels to the screen, beware in this stage that not all styles have the same paint times, also combinations of styles can have a greater paint time than the sum of their parts. For an instance mixing a border-radius with a box-shadow, can triple the paint time of an element instead of using just one of the latter.
 
 How to optimize :
 1. The HTML content should be less as possible or we can pass the HTML into stream.
-2.
+2. We should use Async and Defer to download the external scripts or CSS.
+3. optimising css delivery : We should have inline css which should not impact the HTML parser.
+4.
 
-### DOM Event Life Cycle Method
+## DOM Event Life Cycle Method
 The typical DOM event flow is conceptually divided into three phases:<br>
 **Capture phase**: The capture phase comprises all the DOM elements on the trip from the Document to the parent of the target element on which an event was triggered. In other words, when everything from the Document to the target, not including the target itself.M<br>
 **Target phase**: The target phase occurs when the event reaches the target. Then event fired on the target, before reversing and retracing its steps, propagating back to the outermost Document.<br>
 **Bubbling phase**: The bubbling phase comprises all the DOM elements encountered on the return trip from the target back to the Document. Bubbling gives the freedom of handling an event on any element by its parent elements.<br>
 
+`preventDefault`: Cancels the event if it is cancelable, without stopping further propagation of the event. <br>
+`stopPropagation`: Prevents further propagation of the current event. <br>
+`stopImmediatePropagation`: Prevents other listeners of the same event from being called. <br>
+
+## Execution Context
+
+![Critical Rendering Path](./images/execution_context.gif) <br>
+Important Points :
+* Primitive data and function references will be in EC.
+* Object and function definitation will be in heap
+* Key points : Single threaded, Synchronous execution
+
+**JavaScript interpreter** Whenever we are going to create a new execution there will be 2 stages
+1. Creation Stage
+2. Activation / Code Execution Stage
+
+### FAQ
+
+1. Why Javascript is single threaded? <br>
+As JavaScript engine has only one ECS, it can execute only one thing at a time which is at the top of the ECS. This is what makes JavaScript single threaded. But JRE makes it asynchronous as well<br>
+
+## JavaScript Runtime Environment + Event Loop (JRE)
+
+![JavaScript Runtime Environment](./images/JRE2.gif) <br>
+So far we have discussed JavaScript engine, but the JavaScript engine doesn’t run in isolation. It runs inside an environment called JavaScript Runtime Environment along with many other components. JRE is responsible for making JavaScript asynchronous. It is the reason JavaScript is able to add event listeners and make HTTP requests asynchronously.
+
+JRE is just like a container which consists of the following components:
+
+1. JS Engine
+2. Web API
+3. Callback Queue or message queue
+4. Event Table
+5. Event loop
+
+## Event Loop
+Methods are executed neither in the event table nor in the event queue. They are executed by the JavaScript engine, only if it is present in the ECS. So, for the execution of any method, we need to move that method from the callback queue to the execution context stack. This is what the event loop does! Event loop continuously checks if the execution context stack is empty and if there are any messages in the event queue. It will move the method from the callback queue to ECS only when the execution context stack is empty.
+
+## [This](https://dmitripavlutin.com/gentle-explanation-of-this-in-javascript/#71-this-in-arrow-function)
+The language has 4 function invocation types:
+
+* function invocation: alert('Hello World!')
+* method invocation: console.log('Hello World!')
+* constructor invocation: new RegExp('\\d')
+* indirect invocation: alert.call(undefined, 'Hello World!')
+
+Notes :
+* In Classes arrow function will bind automatically with class object.
+* .bind() makes a permanent context link and will always keep it. A bound function cannot change its linked context when using .call() or .apply() with a different context or even a rebound doesn’t have any effect
+* In strit mode this become undefind in function invocation.
 
 
 
+# Attacks
+
+`XSS` :
+
+`CSRF` :
+
+# Question
+1. Howz javascript executed
+2. How the bundle get load for
+3. How to increase the performance:-> using profiler or light report
+
+
+# ECMAScript :
+`ES6 - 2015` : Classes, import/export, ()=>{}, let/const, promises, template literals. <br>
+`ES7 - 2016` : async/await, block-scoping of variables and functions, destructuring patterns,  <br>
+`ES8 - 2017` : Object.values, Object.entries, Object.getOwnPropertyDescriptors, generators  <br>
+`ES9 - 2018` : Promise.prototype.finally, New features include the spread operator, rest parameters, asynchronous iteration  <br>
+
+```
+let object = {a: 1, b: 2}
+
+let objectClone = Object.assign({}, object) // before ES9
+let objectClone = {...object} // ES9 syntax
+
+let otherObject = {c: 3, ...object}
+console.log(otherObject) // -> {c: 3, a: 1, b: 2}
+```
+`ES10 - 2019` : Array.prototype.flat, Array.prototype.flatMap, changes to Array.sort and Object.fromEntries <br>
+`ES11 - 2020` : Already defined <br>
+[`ES12 - 2021`](https://backbencher.dev/javascript/es2021-new-features) : **String.prototype.replaceAll()**, **WeakRef and Finalizers** (Main use of weak references is to implement caches or mappings to large objects. In such scenarios, we do not want to keep a lot of memory for a long time saving this rarely used cache or mappings. We can allow the memory to be garbage collected soon and later if we need it again, we can generate a fresh cache. and FinalizationRegistry is a companion feature of WeakRef. It lets programmers register callbacks to be invoked after an object is garbage collected), **Promise.any()** : esolves if any of the supplied promises is resolved, **Logical Assignment Operator &&=,||=, ??=** , **Underscores as Numeric Seperator** (1000_000_000), <br>
 
