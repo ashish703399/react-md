@@ -35,21 +35,28 @@ So print, 1 2 3 4.*/
 
 //Input : arr[] = {5, 2, 1, 3, 2}
 //k = 4
-//Output : 5 2 5 1 2 5 1 2 3 5 2 1 3 5
+//Output : 5 =2 5= 1 2 5= 1 2 3 5= 2 1 3 5
 
 let getTopKMostFreqNo = (arr, topk) => {
 	let freqMap = {}
 	let sortedArray = [];
 	let sortedString = '';
 	for(let i = 0; i < arr.length; i++){
-		freqMap[arr[i]] = freqMap[arr[i]] ? freqMap[arr[i]] : 0 + 1;
-		sortedArray.sort();
-		sortedArray.push(arr[i]).sort();
-		for(let j = Math.min(topk-1, sortedArray.length); j >= 0; --j){
+		freqMap[arr[i]] = (freqMap[arr[i]] ? freqMap[arr[i]] : 0) + 1;
+		sortedArray.push(arr[i]);
+		
+		sortedArray = sortedArray.sort((a, b)=> {
+			return a-b;
+		});
+		sortedArray = sortedArray.sort((a, b)=> {
+			return freqMap[b] > freqMap[a];
+		});
+		for(let j = 0; j <= Math.min(topk-1, sortedArray.length); j++){
 			sortedString  += sortedArray[j];
 		}
 		sortedString += '==';
 	}
+	return sortedString;
 }
 
 console.log(getTopKMostFreqNo([5, 2, 1, 3, 2], 4));

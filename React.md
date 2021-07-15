@@ -13,6 +13,36 @@
 [Render Props](#user-content-render-props)<br>
 [Composition vs Inheritence](#user-content-composition-vs-inheritence)<br>
 
+As we add more logic to class components, the size of the component increases fast. Logic within that component can get tangled and unstructured, which can make it difficult for developers to understand where certain logic is used in the class component. This can make debugging and optimizing performance more difficult.
+
+A Higher Order Component (HOC) is a component that receives another component. The HOC contains certain logic that we want to apply to the component that we pass as a parameter. After applying that logic, the HOC returns the element with the additional logic
+
+# Compose functions
+Compose function from right to left. Each function is expected to accept a single parameter. Its return value will be provided as an argument to the function standing to the left, and so on. The exception is the right-most argument which can accept multiple parameters, as it will provide the signature for the resulting composed function.
+
+**Design patterns**
+Design patterns are reusable solutions to commonly occurring problems in software design
+No. of design patterns :
+1. Lazy Initialization Pattern
+2. Builder Pattern
+3. Facade Pattern : internally it will handle all the things and then get and set
+4. Composite Pattern
+5. Adapter Pattern
+6. Observer Pattern
+7. Singleton Pattern
+8. Factory Pattern
+
+
+### Categories Of Design Pattern
+1. Creational Design Patterns : Creational design patterns focus on handling object creation mechanisms where objects are created in a manner suitable for the situation we're working in.
+Some of the patterns that fall under this category are: Constructor, Factory, Abstract, Prototype, Singleton and Builder.
+2. Structural Design Patterns : Structural patterns are concerned with object composition and typically identify simple ways to realize relationships between different objects
+Patterns that fall under this category include: Decorator, Facade, Flyweight, Adapter and Proxy.
+3. Behavioral Design Patterns :
+Behavioral patterns focus on improving or streamlining the communication between disparate objects in a system.
+
+Some behavioral patterns include: Iterator, Mediator, Observer and Visitor.
+
 ### Reconciliation
 The algorithm React uses to diff one tree with another to determine which parts need to be changed.
 

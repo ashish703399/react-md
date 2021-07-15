@@ -19,6 +19,7 @@
 [ES11 | ES2020 Feature](#es11--es2020-feature)<br>
 [ECMAScript](#ecmascript)<br>
 [Best Blogs](#best-blogs)<br>
+[SEO](#seo)<br>
 
 
 ## [2021](https://www.interviewbit.com/javascript-interview-questions/)
@@ -850,4 +851,25 @@ console.log(otherObject) // -> {c: 3, a: 1, b: 2}
 `ES10 - 2019` : Array.prototype.flat, Array.prototype.flatMap, changes to Array.sort and Object.fromEntries <br>
 `ES11 - 2020` : Already defined <br>
 [`ES12 - 2021`](https://backbencher.dev/javascript/es2021-new-features) : **String.prototype.replaceAll()**, **WeakRef and Finalizers** (Main use of weak references is to implement caches or mappings to large objects. In such scenarios, we do not want to keep a lot of memory for a long time saving this rarely used cache or mappings. We can allow the memory to be garbage collected soon and later if we need it again, we can generate a fresh cache. and FinalizationRegistry is a companion feature of WeakRef. It lets programmers register callbacks to be invoked after an object is garbage collected), **Promise.any()** : esolves if any of the supplied promises is resolved, **Logical Assignment Operator &&=,||=, ??=** , **Underscores as Numeric Seperator** (1000_000_000), <br>
+
+
+# SEO
+* very important html using SSR
+* tags in meta tag
+* We can use semantic elements
+* Relevant content
+* Navigation links
+* we can use google amp as well
+* Technical SEO (Title, Meta Tags, Image Alt Tags)
+* Meta description
+* Page Speed and Mobile Friendliness
+* Router should be without HASH
+
+# ARIA Accessibility
+ (i.e. screen readers, magnifiers, text-to-speech, etc.)
+ aria-describedby, aria-haspopup, aria-hidden, aria-label, and aria-labelledby
+ Labels are critical for blind users, user with low vision, users with mobility disabilities and users with memory loss. Missing labels will make a form inaccessible for many users.
+
+
+
 
