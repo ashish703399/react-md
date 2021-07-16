@@ -20,6 +20,8 @@
 [ECMAScript](#ecmascript)<br>
 [Best Blogs](#best-blogs)<br>
 [SEO](#seo)<br>
+[ServiceWorker](#serviceworker)<br>
+[SOLID](#solid)<br>
 
 
 ## [2021](https://www.interviewbit.com/javascript-interview-questions/)
@@ -870,6 +872,12 @@ console.log(otherObject) // -> {c: 3, a: 1, b: 2}
  aria-describedby, aria-haspopup, aria-hidden, aria-label, and aria-labelledby
  Labels are critical for blind users, user with low vision, users with mobility disabilities and users with memory loss. Missing labels will make a form inaccessible for many users.
 
+ # ServiceWorker
+ * so it can't access the DOM directly. Instead, a service worker can communicate with the pages it controls by responding to messages sent via the postMessage interface, and those pages can manipulate the DOM if needed
+ * Service worker is a programmable network proxy, allowing you to control how network requests from your page are handled
+ * It's terminated when not in use, and restarted when it's next needed, so you cannot rely on global state within a service worker's onfetch and onmessage handlers
+ *
 
-
+# SOLID
+![SOLID](./images/SOLID.png) <br><br><br>
 
