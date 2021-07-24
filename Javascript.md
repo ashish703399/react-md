@@ -504,6 +504,11 @@ map3.set(obj, {age:23});
 
 ### Object Destructuring & Rest Operator
 
+
+Spread syntax (...) is another helpful addition to JavaScript for working with arrays, objects, and function calls. Spread allows objects and iterables (such as arrays) to be unpacked, or expanded, which can be used to make shallow copies of data structures to increase the ease of data manipulation
+
+the rest syntax will create an array of an indefinite number of arguments
+
 ```javascript
 const classDetails = {
   strength: 78,
@@ -732,6 +737,8 @@ export { utils }<br>
 * [Depth of this](https://dmitripavlutin.com/gentle-explanation-of-this-in-javascript/#23-pitfall-this-in-an-inner-function)
 * [Design Patterns](https://addyosmani.com/resources/essentialjsdesignpatterns/book/)
 * [React Fiber](https://link.medium.com/Y3xinuTw9gb)
+* [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+* [Margin Collapse](https://www.smashingmagazine.com/2019/07/margins-in-css/)
 
 ## [Critical Path Rendering](!https://medium.com/@luisvieira_gmr/understanding-the-critical-rendering-path-rendering-pages-in-1-second-735c6e45b47a)
 In order to render the component the browser has to go through a series of steps:
@@ -866,6 +873,7 @@ console.log(otherObject) // -> {c: 3, a: 1, b: 2}
 * Meta description
 * Page Speed and Mobile Friendliness
 * Router should be without HASH
+* Aria accessibility related tags
 
 # ARIA Accessibility
  (i.e. screen readers, magnifiers, text-to-speech, etc.)

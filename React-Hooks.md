@@ -264,6 +264,8 @@ Note : This works because useRef() creates a plain JavaScript object. The only d
 ### useImperativeHandle
 useImperativeHandle customizes the instance value that is exposed to parent components when using ref. As always, imperative code using refs should be avoided in most cases. useImperativeHandle should be used with forwardRef:
 
+https://stackoverflow.com/questions/57005663/when-to-use-useimperativehandle-uselayouteffect-and-usedebugvalue
+
 ```
 function FancyInput(props, ref) {
   const inputRef = useRef();
