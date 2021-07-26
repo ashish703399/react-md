@@ -1,0 +1,47 @@
+<html>
+<head>
+<script>
+function throttle(fn, delay){
+	let isClicked;
+	console.log(this);
+	return function(...args){
+		if(isClicked)
+			return;
+		isClicked = true;
+		fn(...args);
+		console.log(this);
+		setTimeout(()=>{
+			isClicked = false;
+		}, delay);
+	}
+}
+const handleClick = throttle((data)=>{
+	console.log(data, this);
+}, 1000);
+</script>
+<style>
+html{
+	font-size: 22px;
+}
+body{
+	
+}
+.divtest{
+	
+}
+.ptest{
+	font-size: 1em;
+}
+</style>
+</head>
+<body>
+	<div class="divtest">
+		<p class="ptest">test</p>
+	</div>
+	
+	<label for="inputfl">Name</label>
+	<input id="inputfl" placeholder="Enter Name" />
+	<button onClick="handleClick('as')">Click me</button>
+	
+<body>
+</html>

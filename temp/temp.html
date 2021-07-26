@@ -1,0 +1,18 @@
+<html>
+<head>
+<script>
+function pageload(){
+	console.log('pageLoad');
+	document.getElementById('myform').addEventListener('load', ()=>{		
+	  console.log('formLoad');
+  })
+}
+</script>
+</head>
+<body onload="pageload()" >
+	<div id='mydiv' >
+	
+		<form id='myform' />    
+     </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <style>
+      body {
+        background-color: #1d2126;
+        color: white;
+      }
+      
+      .header{
+        display: flex;
+        justify-content: center;
+      }
+      
+      #tiles {
+        display: grid;
+		justify-content: space-around;
+      }
+      
+      .tile {
+        width: 50px;      
+        height: 50px; 
+        background-color: white;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        border: 3px solid green;
+      }
+      
+      .items {
+          
+      }
+      
+      
+		@media screen and (min-width: 300px) {
+		  body {
+			background-color: red;
+		  }
+		  
+		  #tiles {
+            grid-template-columns: auto auto;
+          }
+		}
+
+		@media screen and (min-width: 600px){
+			body {
+				background-color: green;
+		  }
+		  
+			#tiles {
+			  grid-template-columns: auto auto auto;
+			}
+		}
+		
+		@media screen and (min-width: 1024px){
+		body {
+			background-color: lightblue;
+		  }
+		  
+		  
+			#tiles {
+			  grid-template-columns: auto auto auto auto;
+			}
+		}
+    </style>
+  </head>
+  <body load='renderTiles'>
+    <h1 class="header">Trending</h1>
+    <div id="tiles" class"items"></h1>
+  </body>
+  <script>
+    const arr = ['Tile 1','Tile 2','Tile 3','Tile 4','Tile 5','Tile 6']
+    //function renderTiles(){
+      let tileHtml = '';
+      const parentElement = document.getElementById('tiles');
+      const html = arr.map(data=>{
+        return tileHtml += '<div class="tile">'+data+'</div>';
+      })
+      parentElement.innerHTML = tileHtml;
+    //}
+  </script>
+</html>

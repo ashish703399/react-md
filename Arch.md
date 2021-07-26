@@ -1,31 +1,39 @@
-# Points to be consider for Scalable app
+# Webapp Architecture
 
-* SEO consideration (amp, SSR, meta tags, accessibility tags, image alt tags, semantic ele, internal linking in breadcrumb)
-  * Exactly one <h1> tag per page
-  * Make sure you have a title tag per page
-  *
-* Accessibility
-* SSR
-* FP and FCP metricies
-* TTFB metricies
-* Mobile design
-* Lazy load pattern
-* CDN - Cloud Caching
+* Tech Stack -> Vanilla JS, ReactJS, Angular, Vue JS
+* Search Engine optimization Consideration (AMP, SSR, Meta Tags, Accessbility, alt tags, H1, semantic, nav, proper content)
+* Server Side Rendering Server -> Routing middleware
+* Security
+* Accessibility -> It helps the browser to read the data
+* Responsive UI
 * Localization
-* Accessibility
-* Caching on browser end - Service worker
-* Design Patterns
+* Performance Metrices -> FP, LCP, FMP, TTI, TTFB
+* CDN for assets and Cloud Caching
+* Browser Caching
+* Google AMP
+* Deployment strategy
+* Mono Repo/Micro Frontend
+* DevOps -> Jenkins/Kubernetes(load balancing)/GCP/
+* Code Arch
+  * Atomic/Molecules
+  * Module Pattern for components
+  * Container/Presentation Pattern/ Custom Hooks for Bussniess logic
+  * LazyLoad Implementation
+  * Expensive should on worker thread
+  * Browser cache
+  * Optimized critical rendering path -> Async/Defer/Preload/Prefetch
+  * Content Management System (Labels/ Switch Config/Bootstrap)
+* Layer
+  * Caching Layer
+  * Node JS Layer
+  * React Layer
+  * API Layer
+  * Backend Layer(it will have own structre or architecture)
+  * Datebase layer (connection Bottleneck)
 
-# Metricies for web app performance
-* First paint
-* First Containtful page
-* First meaningful page
-* Time to interaction
-* TTFB
-* Api response time
-* Cloud Caching
-* Service worker
-* First CPU Idle
+
+
+### Teck->SEO/SSR/Security->Mobile/Metrices->Accessbility->Design Pattern->CMS->Localization/LazyLoad->Cache->CI/CD->CDN->AMP->FrontEnd-> Atom/Molecule/
 
 # How to improve FCP
 * Elemenate Rendering Blocking script using async and defer
@@ -37,16 +45,26 @@
 * Minimize critical request depth
 * Keep request counts low and transfer sizes small
 
-# While setting up new project :
-*
-
+# Metricies for web app performance
+* First paint
+* First Containtful paint
+* First meaningful paint
+* Time to interaction
+* TTFB
+* Api response time
+* Cloud Caching
+* Service worker
+* First CPU Idle
 
 # Architecure for Frontend App ==>
-* Offline access i.e. **PWA** => **Service Worker** (Cache upto 50MB files)
-* **SEO** Concern
+* Tech Stack
+* **SEO**
 * **Cloud Caching**
 * **Localization**
-* **Content Delivery Network** and Google **AMP** Pages due to this page will have higher rank on Google Crawler
+* **Content Delivery Network** and Google **AMP** Pages due to this page will have higher rank on Google
+* Offline access i.e. **PWA** => **Service Worker** (Cache upto 50MB files)
+* Accessibility
+* Web Security
 * Node JS Server -> **Express** -> Api call for render component(bootstrap/localization/config/component data) -> react -> initialdata with HTML (bundle information) in chunks -> Critical Rendering Path(Elemenate Render blocking things) -> **Progressive Hydration** -> idleIime -> prefetching 3rd party lib -> remaining components with lazy load behaviour ->
 * Bundling Part -> webpack
 * Code Quality -> Unit Testing / Chai/Enzyme/Mocha/Karma
@@ -58,7 +76,6 @@
       * team dependency get reduce
       *
 * Task Managment Tool -> Jira
-
 * DevOps -> Jenkins/Kubernetes(load balancing)/GCP/
 * CMS(Drupal) ->
 * Kafka
