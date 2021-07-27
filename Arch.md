@@ -1,29 +1,36 @@
 # Webapp Architecture
 
 * Tech Stack -> Vanilla JS, ReactJS, Angular, Vue JS
-* Search Engine optimization Consideration (AMP, SSR, Meta Tags, Accessbility, alt tags, H1, semantic, nav, proper content)
-* Server Side Rendering Server -> Routing middleware
-* Security
-* Accessibility -> It helps the browser to read the data
-* Responsive UI
-* Localization
-* Performance Metrices -> FP, LCP, FMP, TTI, TTFB
-* CDN for assets and Cloud Caching
-* Browser Caching
-* Google AMP
-* Deployment strategy
-* Mono Repo/Micro Frontend
+* <ins>Search Engine optimization</ins> Consideration (AMP, SSR, Meta Tags, Accessbility, alt tags, H1, semantic, nav, proper content)
+* <ins>Server Side Rendering Server</ins> -> Routing middleware
+* <ins>Security</ins>
+  * **Brute force** -> attack consists of an attacker submitting many passwords or passphrases with the hope of eventually guessing correctly.
+  * **Cross Site Scripting** -> Stored and reflected
+  * **Cross Site Request Forgery** -> post rest api from different browser
+  * **Cross site resource sharing** -> Preflight calls to check the authentication
+  * **HTTPS**
+  * **Application firewall** -> filter all the suspcious request
+* <ins>Accessibility</ins> -> It helps the browser to read the data
+* <ins>Responsive UI</ins>
+* <ins>Localization</ins>
+* <ins>Performance</ins> Metrices -> FP, LCP, FMP, TTI, TTFB
+* <ins>CDN</ins> for assets and <ins>Cloud Caching</ins>
+* <ins>Browser Caching</ins>
+* <ins>Google AMP</ins>
+* <ins>Deployment strategy</ins>
+* <ins>Mono Repo/Micro Frontend</ins>
+* <ins>webpack</ins> and babel for older browser
 * DevOps -> Jenkins/Kubernetes(load balancing)/GCP/
-* Code Arch
-  * Atomic/Molecules
-  * Module Pattern for components
-  * Container/Presentation Pattern/ Custom Hooks for Bussniess logic
-  * LazyLoad Implementation
-  * Expensive should on worker thread
-  * Browser cache
-  * Optimized critical rendering path -> Async/Defer/Preload/Prefetch
-  * Content Management System (Labels/ Switch Config/Bootstrap)
-* Layer
+* <ins>Code Arch</ins>
+  * **Atomic/Molecules**
+  * **Module Pattern** for components
+  * **Container/Presentation** Pattern/ Custom Hooks for Bussniess logic
+  * **LazyLoad Pattern** Implementation
+  * **Expensive should on worker thread**
+  * **Browser cache**
+  * Optimized **critical rendering path** -> Async/Defer/Preload/Prefetch
+  * **Content Management System (Labels/ Switch Config/Bootstrap)**
+* <ins>Layer</ins>
   * Caching Layer
   * Node JS Layer
   * React Layer
