@@ -13,7 +13,7 @@
 * <ins>Accessibility</ins> -> It helps the browser to read the data
 * <ins>Responsive UI</ins>
 * <ins>Localization</ins>
-* <ins>Performance</ins> Metrices -> FP, LCP, FMP, TTI, TTFB
+* <ins>Performance</ins> Metrices -> FP, FCP(1.5ms), LCP, FMP, TTI(0-200ms), Total Blocking Time(total amount of time that a page is blocked from responding to user input), TTFB, Commulative Layout Shifting
 * <ins>CDN</ins> for assets and <ins>Cloud Caching</ins>
 * <ins>Browser Caching</ins>
 * <ins>Google AMP</ins>
@@ -26,7 +26,7 @@
   * **Module Pattern** for components
   * **Container/Presentation** Pattern/ Custom Hooks for Bussniess logic
   * **LazyLoad Pattern** Implementation
-  * **Expensive should on worker thread**
+  * **Expensive work should on worker thread**
   * **Browser cache**
   * Optimized **critical rendering path** -> Async/Defer/Preload/Prefetch
   * **Content Management System (Labels/ Switch Config/Bootstrap)**
@@ -38,9 +38,19 @@
   * Backend Layer(it will have own structre or architecture)
   * Datebase layer (connection Bottleneck)
 
+# Core Web Vitals/Light house
+  * PWA
+  * Speed - will show all metricis
+  * Best Practices - Browser error, Cross origin request,
+  * Performance
+  * Accessbility
 
-
-### Teck->SEO/SSR/Security->Mobile/Metrices->Accessbility->Design Pattern->CMS->Localization/LazyLoad->Cache->CI/CD->CDN->AMP->FrontEnd-> Atom/Molecule/
+# Why react is better than other framwork
+  * React works in <ins>**Componenets**</ins>, We can use re-use this component with very less complexity and it also help us to align developer in separetly and we can, **Complex ui with simple Components**
+  * Due to React <ins>**Virtual DOM**</ins> it will update only the current elements into the dom instead of iterating whole dom with the help of Virtual DOM.
+  * React itself has own <ins>**large community**</ins> for solution and new libraries.
+  * React just provide us on <ins>**View layer**</ins> only, for other things like routing, http calls, state manaement we are free to use any lib or we can create own as well.
+  * React also provide <ins>**React Native framework**</ins> in case if we want to go with hybrid application where we can just copy, paste and reuse the bussiness logic
 
 # How to improve FCP
 * Elemenate Rendering Blocking script using async and defer
